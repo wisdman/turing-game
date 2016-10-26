@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru" itemscope itemtype="http://schema.org/Webpage">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta http-equiv="cleartype" content="on">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta name="format-detection" content="telephone=no">
+
+	<title>Turing test game</title>
+
+	<link rel="stylesheet" href="css/core.css" type="text/css">
+	<link rel="stylesheet" href="css/diskleimer.css" type="text/css">
+	<link rel="stylesheet" href="css/question.css" type="text/css">
+	<link rel="stylesheet" href="css/result.css" type="text/css">
+	<link rel="stylesheet" href="css/scoreboard.css" type="text/css">
+	<link rel="stylesheet" href="css/scoreline.css" type="text/css">
+
+	<script src="game.js" type="text/javascript"></script>
+</head>
+<body class="dark">
+	<div class="wrapper diskleimer" app-ui="diskleimer">
+		<div class="diskleimer_data">
+			<p>Это тест формата “Вопрос-ответ”. Вам будет представлен ряд вопросов, ответы на которые будут давать либо робот, либо живой человек</p>
+			<p>На основании полученных данных вам необходимо определить, с кем из них вы разговариваете</p>
+			<button class="diskleimer_startgame" app-event="click, start">начать игру</button>
+		</div>
+	</div>
+	<div class="wrapper question" app-ui="question">
+		<div class="question_data" app-node="question">
+			<!-- <div class="question_card">
+				<p class="question_card_text">Вопрос задается в виде чата, так же в виде чата дается на него ответ. Задача - отпределить с кем вы разговариваете за максимально короткий отрезок времени.</p>
+				<p class="question_card_answer">Это ответ либо робота, либо человека. Вы должны догадаться сами.</p>
+			</div> -->
+		</div>
+		<div class="question_ui">
+			<div class="question_ui_score">
+				<span class="question_ui_score_text source" app-bind="score"></span>
+				<span class="question_ui_score_tooltip">Ваш счет</span>
+			</div>
+			<div class="question_ui_button_wrapper">
+				<button class="question_ui_button" app-event="click, ai">робот</button>
+				<button class="question_ui_button" app-event="click, human">человек</button>
+			</div>
+			<div class="question_ui_score_time">
+				<span class="question_ui_score_time_text source" app-bind="time">01:59.345</span>
+				<span class="question_ui_score_time_tooltip">Осталось времени</span>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper result" app-ui="result">
+		<div class="result_score">
+			<span class="result_score_text source" app-bind="score"></span>
+			<span class="result_score_tooltip">Ваш счет</span>
+		</div>
+		<div class="result_user">
+			<button class="result_user_photo" app-event="click, photo">
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" viewBox="0 0 500 512">
+					<path d="M170.24,30v34.625v30h30H470V482H30V94.625h44.341h30v-30V30H170.24 M402.414,199.555c23.868,0,43.287-19.414,43.287-43.277c0-23.863-19.418-43.277-43.287-43.277s-43.287,19.414-43.287,43.277C359.127,180.141,378.546,199.555,402.414,199.555 M250,427.478c34.786,0,67.491-13.538,92.091-38.119c24.606-24.587,38.156-57.28,38.156-92.055s-13.551-67.467-38.156-92.055c-24.6-24.582-57.305-38.119-92.091-38.119s-67.491,13.538-92.091,38.119c-24.606,24.587-38.156,57.28-38.156,92.055s13.551,67.467,38.156,92.055C182.509,413.94,215.214,427.478,250,427.478 M200.24,0H74.341v64.625H0V512h500V64.625H200.24V0L200.24,0z M402.414,169.555c-7.338,0-13.287-5.944-13.287-13.277c0-7.333,5.949-13.277,13.287-13.277s13.287,5.944,13.287,13.277C415.701,163.611,409.752,169.555,402.414,169.555L402.414,169.555z M250,397.478c-55.365,0-100.248-44.849-100.248-100.174c0-55.325,44.882-100.174,100.248-100.174s100.248,44.849,100.248,100.174C350.248,352.628,305.365,397.478,250,397.478L250,397.478z"></path>
+				</svg>
+			</button>
+			<div class="result_user_name">
+				<input type="text" placeholder="Напишите ваше имя" app-bind="name">
+			</div>
+			<button class="result_user_submit" app-event="click, submit">ОК</button>
+		</div>
+		<button class="result_user_restart" app-event="click, start">Повторить тест</button>
+	</div>
+	<div class="wrapper scoreboard" app-ui="scoreboard" app-node="scoreboard">
+		<!-- <div class="scoreboard_card">
+			<img class="scoreboard_card_image">
+			<span class="scoreboard_card_name"></span>
+			<span class="scoreboard_card_score"></span>
+		</div> -->
+	</div>
+	<span class="title" app-ui="title" app-bind="title">Заголовок</span>
+	<div class="box sysinfo source" app-ui="sysinfo">
+		<div class="sysinfo_card sysinfo_card-top">
+			<div>
+				<span>Node ID:</span>
+				<span app-bind="app">34123</span>
+			</div>
+			<div>
+				<span>User ID:</span>
+				<span app-bind="user">21412</span>
+			</div>
+		</div>
+		<div class="sysinfo_card sysinfo_card-bottom">
+			<div>
+				<span>IP:</span>
+				<span app-bind="ip">0.0.0.0</span>
+			</div>
+		</div>
+	</div>
+	<div class="scoreline" app-ui="scoreline">
+		<div class="scoreline_progress" style="max-width: 0%" app-style="maxWidth, progress">
+			<div class="scoreline_tooltip">
+				<span class="scoreline_tooltip_top">Вы</span>
+				<span class="scoreline_tooltip_bottom" app-bind="score"></span>
+			</div>
+		</div>
+		<div class="scoreline_tooltip scoreline_tooltip-record" app-style="opacity, recordOpacity">
+			<span class="scoreline_tooltip_top">Рекорд</span>
+			<span class="scoreline_tooltip_bottom" app-bind="record"></span>
+		</div>
+	</div>
+	<button class="close" app-ui="close" app-event="click, end" app-bind="close">Закончить игру</button>
+	<button class="scoreboard_button" app-ui="scoreboard-btn" app-event="click, scoreboard">турнирная таблица</button>
+</body>
+</html>
+
+<!--
+
+document.body.$app.tuneUI() - first
+document.body.$app.tuneUI(['diskleimer', 'sysinfo', 'scoreboard-btn'],'dark') - diskleimer
+document.body.$app.tuneUI(['question', 'title', 'sysinfo', 'scoreline', 'close']) - game
+document.body.$app.tuneUI(['result', 'title', 'sysinfo', 'scoreline', 'close', 'scoreboard-btn']) - result
+
+ -->

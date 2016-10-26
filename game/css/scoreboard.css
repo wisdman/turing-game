@@ -1,0 +1,92 @@
+.scoreboard {
+	background: rgba(0, 0, 0, .83);
+	padding: calc(var(--baseIndent) + 5%) 25%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-content: center;
+	align-items: center;
+}
+
+.scoreboard_card {
+	width: auto;
+	height: 100px;
+	min-height: 100px;
+	line-height: 100px;
+}
+.scoreboard_card.empty > * {
+	display: none;
+}
+
+.scoreboard_card_image,
+.scoreboard_card_name,
+.scoreboard_card_score {
+	display: inline-block;
+	height: inherit;
+	line-height: inherit;
+	vertical-align: middle;
+}
+
+.scoreboard_card_image {
+	width: 100px;
+	border: 1px solid currentColor;
+}
+
+.scoreboard_card_name {
+	font-size: 30px;
+	margin: 0 1em;
+}
+
+.scoreboard_card_score {
+	font-size: 40px;
+}
+
+.scoreboard_card_score:before {
+	content: '/'
+}
+
+.scoreboard_card {
+	position: absolute;
+	top: calc(50% - 400px);
+	transform: scale(0);
+	opacity: 0;
+
+	transition: top .1s, opacity .1s, transform .1s;
+}
+
+.scoreboard_card.current {
+	top: calc(50% - 300px);
+	transform: scale(0.5);
+	opacity: 0.3;
+}
+
+.scoreboard_card.current + .scoreboard_card {
+	top: calc(50% - 200px);
+	transform: scale(0.7);
+	opacity: 0.5;
+}
+
+.scoreboard_card.current + .scoreboard_card + .scoreboard_card {
+	top: calc(50% - 50px);
+	transform: scale(1);
+	opacity: 1;
+}
+
+.scoreboard_card.current + .scoreboard_card + .scoreboard_card + .scoreboard_card {
+	top: calc(50% + 100px);
+	transform: scale(0.7);
+	opacity: 0.5;
+}
+
+.scoreboard_card.current + .scoreboard_card + .scoreboard_card + .scoreboard_card + .scoreboard_card {
+	top: calc(50% + 200px);
+	transform: scale(0.5);
+	opacity: 0.3;
+}
+
+.scoreboard_card.current + .scoreboard_card + .scoreboard_card + .scoreboard_card + .scoreboard_card ~ .scoreboard_card {
+	top: calc(50% + 250px);
+	transform: scale(0);
+	opacity: 0;
+}

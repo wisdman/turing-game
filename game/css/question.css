@@ -1,0 +1,155 @@
+.question {
+	background: #fefefe;
+
+	padding: 17% var(--baseIndent);
+
+	display: flex;
+	flex-flow: column;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+}
+
+.question_ui {
+	display: flex;
+	flex-flow: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: stretch;
+}
+
+.question_ui > div {
+	flex: 1 1 auto;
+}
+
+.question_ui div.question_ui_score,
+.question_ui div.question_ui_score_time {
+	max-width: 170px;
+	min-width: 170px;
+}
+
+.question_ui_score_text {
+	display: block;
+	font-size: 80px;
+	text-transform: lowercase;
+	margin-top: -12px;
+}
+
+.question_ui_score_tooltip {
+	display: block;
+	font-size: 12px;
+	text-transform: uppercase;
+}
+
+.question_ui_score_time_text {
+	display: block;
+	font-size: 30px;
+	text-transform: lowercase;
+	margin-top: -4px;
+}
+
+.question_ui_score_time_tooltip {
+	display: block;
+	font-size: 12px;
+	text-transform: uppercase;
+	margin-top: 8px;
+}
+
+.question_ui_button_wrapper {
+	text-align: center;
+}
+
+.question_ui_button {
+	display: inline-block;
+	height: 100%;
+	border: 2px solid currentColor;
+	font-size: 20px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	min-width: 150px;
+	text-align: center;
+	margin: 0 1em;
+	font-weight: normal;
+	transition: color .1s;
+}
+
+.question_ui_button:hover {
+	color: #af0000;
+}
+
+.question_data {
+	position: relative;
+	width: 50%;
+	max-width: 50%;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.question_data.hide {
+	opacity: 0;
+}
+
+.question_data:after {
+	display: block;
+	content: '';
+	position: absolute;
+	left: 100px;
+	top: 0;
+	bottom: 0;
+	width: 1px;
+	background: currentColor;
+	height: 100%;
+}
+
+.question_card {
+	width: 100%;
+	height: auto;
+	min-height: 0;
+	display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+	justify-content: center;
+
+	position: absolute;
+	left: 0;
+	top: -100%;
+
+	transition: top .5s;
+}
+
+.question_card.current {
+	top: 0;
+}
+
+.question_card.current ~ .question_card {
+	top: 100%;
+}
+
+.question_card p {
+	position: relative;
+	padding-left: 120px;
+	line-height: 1.3;
+}
+
+.question_card p:before {
+	display: block;
+	position: absolute;
+
+	left: 0;
+	top:0;
+	font-variant: small-caps;
+	text-transform: lowercase;
+	font-weight: 300;
+}
+
+.question_card p.question_card_text:before {
+	content: '[ вопрос ]';
+}
+
+.question_card p.question_card_answer:before {
+	content: '[ кто это ? ]';
+}
+
+.question_card p.question_card_answer {
+	margin-top: 5ex;
+}
+

@@ -1,0 +1,49 @@
+.diskleimer {
+	background: rgba(0, 0, 0, .83);
+}
+
+.diskleimer_data {
+	position: absolute;
+	left: 50%;
+	top:50%;
+	transform: translate(-50%, -50%);
+
+	display: flex;
+	flex-flow: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: stretch;
+	align-items: stretch;
+
+}
+
+.diskleimer_data p {
+	font-size: 16px;
+	line-height: 1.5;
+	width: 50%;
+	max-width: 50%;
+	min-width: 50%;
+	padding: 0 1.5em;
+	text-align: justify;
+}
+
+.diskleimer_startgame {
+	margin: 2ex 0 0 0;
+	font-size: 40px;
+	letter-spacing: 0.5em;
+	white-space: nowrap;
+	text-transform: lowercase;
+	font-variant: small-caps;
+	transition: color .1s;
+}
+
+.diskleimer_startgame:before {
+	content: '\005B'
+}
+.diskleimer_startgame:after {
+	content: '\005D'
+}
+
+.diskleimer_startgame:hover {
+	color: #af0000;
+}

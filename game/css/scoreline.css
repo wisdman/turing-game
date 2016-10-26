@@ -1,0 +1,47 @@
+.scoreline {
+	display: block;
+	overflow: visible;
+	position: absolute;
+	left: calc(var(--baseIndent) + 120px);
+	bottom: calc(var(--baseIndent) + 12px);
+	right: calc(var(--baseIndent) + 120px);
+	width: auto;
+	height: 6px;
+	background: #acacac;
+	border-radius: 2px;
+}
+
+.scoreline_progress {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	max-width: 0;
+	background: #3c3c3c;
+	border-radius: 2px;
+}
+
+.scoreline_tooltip {
+	display: block;
+	position: absolute;
+	right: -25px;
+	top: 0;
+	width: 50px;
+}
+
+.scoreline_tooltip span {
+	display: block;
+	position: absolute;
+	width: 100%;
+	left: 0;
+	font-size: 14px;
+	text-align: center;
+}
+
+.scoreline_tooltip_top {
+	top: -25px;
+}
+
+.scoreline_tooltip_bottom {
+	top: 18px;
+}
