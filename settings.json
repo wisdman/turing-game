@@ -1,5 +1,4 @@
 {
-	"gameTime": 120,
-	"cluster": true,
-	"nodeId": "auto"
+	"gameTime": 60,
+	"screensaverTimeout": 30
 }

@@ -20,8 +20,8 @@
 		"dev": "electron . --debug"
 	},
 	"dependencies": {
-		"electron": "latest",
-		"netmask": "latest",
-		"uuid": "latest"
+		"electron": "*",
+		"netmask": "*",
+		"uuid": "*"
 	}
 }

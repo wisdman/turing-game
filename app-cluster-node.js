@@ -4,7 +4,7 @@
  */
 
 'use strict';
-const REBUILD_CLUSTER_TIMEOUT = 60 * 1000
+const REBUILD_CLUSTER_TIMEOUT = 10 * 1000
 
 const os = require('os')
 const fs = require('fs')
@@ -17,6 +17,8 @@ const netBlocks = []
 
 module.exports = class AppClusterNode {
 	constructor() {
+		this.id = uuid.v1()
+
 		this.myIPAddresses = []
 		this.neighborIPAddresses = []
 
@@ -24,14 +26,14 @@ module.exports = class AppClusterNode {
 		this.questions = JSON.parse(fs.readFileSync('questions.json', 'utf8') || '[]')
 		this.scoreboard = JSON.parse(fs.readFileSync('scoreboard.json', 'utf8') || '[]')
 
-		this.update()
+		this.rebuildClusterLoop()
 	}
 
 	get firstIP() {
 		return this.myIPAddresses[0] || '0.0.0.0'
 	}
 
-	rebuildCluster() {
+	rebuildClusterLoop() {
 		let myIPAddresses = []
 		let netBlocks = []
 
@@ -55,22 +57,24 @@ module.exports = class AppClusterNode {
 		this.myIPAddresses = myIPAddresses.slice();
 		this.neighborIPAddresses = neighborIPAddresses.slice();
 
-		setTimeout(this.rebuildCluster, REBUILD_CLUSTER_TIMEOUT)
-	}
+		new Promise( resolve => {
 
-	update() {
-		this.rebuildCluster()
-		if (this.onUpdate instanceof Function)
-			this.onUpdate.call(this)
+			if (this.onUpdate instanceof Function)
+				this.onUpdate.call(this)
+
+			setTimeout(() => resolve(), REBUILD_CLUSTER_TIMEOUT)
+
+		}).catch( error => console.error(error) )
+		.then( () => this.rebuildClusterLoop() )
 	}
 
 	get record() {
 		return this.scoreboard.reduce( (prev, item) => Math.max(prev, item.value), 0 )
 	}
 
-	addRecord(name, value, photo) {
+	addRecord(id, name, value, photo) {
 		this.scoreboard.push({
-			id: uuid.v1(),
+			id: id,
 			name: name,
 			value: value
 		})

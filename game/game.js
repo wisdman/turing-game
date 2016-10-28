@@ -10,8 +10,13 @@ const MODE_GAME = 3
 const MODE_RESULT = 4
 const MODE_SCOREBOARD = 5
 
+const uuid = require('uuid')
+
 const AppClusterNode = require('../app-cluster-node.js')
 const appClusterNode = new AppClusterNode()
+
+const GAME_TIME = (appClusterNode.settings.gameTime || 60) * 1000
+const SCREENSAVER_TIMEOUT = (appClusterNode.settings.screensaverTimeout || 30) * 1000
 
 const App = require('./app.js')
 
@@ -26,7 +31,7 @@ Array.prototype.shuffle = function() {
 	return this
 }
 
-const buildScoreboard = (parentNode) => {
+const buildScoreboard = parentNode => {
 	if (!parentNode)
 		throw TypeError('parentNode not set')
 
@@ -42,7 +47,7 @@ const buildScoreboard = (parentNode) => {
 	})
 }
 
-const buildQuestions = (parentNode) => {
+const buildQuestions = parentNode => {
 	if (!parentNode)
 		throw TypeError('parentNode not set')
 
@@ -52,14 +57,25 @@ const buildQuestions = (parentNode) => {
 
 	let arr = appClusterNode.questions
 	.reduce( (prev, item) => {
-		let node = document.createElement('div')
-		node.className = 'question_card'
-		node.$type = ['human', 'ai'][ Math.round(Math.random())]
-		node.innerHTML = `<p class="question_card_text">${item.question}</p><p class="question_card_answer">${item[node.$type]}</p>`
-		prev.push(node)
+
+		let [A, B] = ['human', 'ai'].shuffle()
+
+		let nodeA = document.createElement('div')
+		nodeA.className = 'question_card'
+		nodeA.$type = A
+		nodeA.innerHTML = `<p class="question_card_text">${item.question}</p><p class="question_card_answer">${item[A]}</p>`
+		prev.A.push(nodeA)
+
+		let nodeB = document.createElement('div')
+		nodeB.className = 'question_card'
+		nodeB.$type = B
+		nodeB.innerHTML = `<p class="question_card_text">${item.question}</p><p class="question_card_answer">${item[B]}</p>`
+		prev.B.push(nodeB)
+
 		return prev
-	}, [])
-	.shuffle()
+	}, { A: [], B: [] })
+
+	arr = arr.A.shuffle().concat(arr.B.shuffle())
 
 	arr.forEach(node => {
 		parentNode.appendChild(node)
@@ -89,6 +105,13 @@ const timeToStr = time => {
 window.addEventListener('DOMContentLoaded', () => {
 
 	const game = new App(document.body)
+	game.data.app = appClusterNode.id
+	game.data.user = '---'
+
+	appClusterNode.onUpdate = () => {
+		game.data.ip = appClusterNode.firstIP
+	}
+
 	let questionNode = game.nodes.question
 	let currentQuestion = null
 
@@ -134,16 +157,19 @@ window.addEventListener('DOMContentLoaded', () => {
 		gameMode = mode
 		switch(mode) {
 			case MODE_HEAD:
+				game.data.user = '---'
 				game.setUI()
 			break
 			case MODE_DISKLEIMER:
+				game.data.user = '---'
 				game.setUI(['diskleimer', 'sysinfo', 'scoreboard-btn'], 'dark')
 			break
 			case MODE_GAME:
+				game.data.user = uuid.v4()
 				game.data.title = 'Оприделите кто отвечает'
 				game.data.close = 'Завершить игру'
 				score = 0
-				time = appClusterNode.settings.gameTime * 1000
+				time = GAME_TIME
 				record = appClusterNode.record
 
 				buildQuestions(questionNode)
@@ -158,6 +184,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				document.body.$app.setUI(['result', 'title', 'sysinfo', 'scoreline', 'close', 'scoreboard-btn'])
 			break
 			case MODE_SCOREBOARD:
+				game.data.user = '---'
 				game.data.title = 'Лучшие результаты'
 				game.data.close = 'Закрыть таблицу'
 				buildScoreboard(game.nodes.scoreboard)
@@ -168,7 +195,20 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
+	let wasteTime = +new Date()
+	const wasteTimeLoop = () => {
+		let diff = (+new Date()) - wasteTime
+
+		if ((diff > SCREENSAVER_TIMEOUT) && (gameMode === MODE_DISKLEIMER || gameMode === MODE_SCOREBOARD))
+			setMode(MODE_HEAD)
+
+		setTimeout(wasteTimeLoop, 1000)
+	}
+	wasteTimeLoop()
+
 	window.addEventListener('mousemove', event => {
+		wasteTime = +new Date()
+
 		if (gameMode === MODE_HEAD)
 			setMode(MODE_DISKLEIMER)
 	})
@@ -208,13 +248,15 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		game.data.name = ' '
 
-		appClusterNode.addRecord(name, score, null)
+		appClusterNode.addRecord(game.data.user, name, score, null)
 		setMode(MODE_SCOREBOARD)
 	})
 
 	let blockScroll = false
 
 	window.addEventListener('mousewheel', event => {
+		wasteTime = +new Date()
+
 		if (gameMode !== MODE_SCOREBOARD)
 			return
 
@@ -247,4 +289,6 @@ window.addEventListener('DOMContentLoaded', () => {
 			})
 		setTimeout(() => blockScroll = false, 100)
 	})
+
+
 })
