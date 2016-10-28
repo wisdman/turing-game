@@ -42,7 +42,7 @@ const buildScoreboard = parentNode => {
 	.forEach( item => {
 		let node = document.createElement('div')
 		node.className = 'scoreboard_card'
-		node.innerHTML = `<div class="scoreboard_card_image"></div><span class="scoreboard_card_name">${item.name}</span><span class="scoreboard_card_score source">${item.value}</span>`
+		node.innerHTML = `<span class="scoreboard_card_name">${item.name}</span><span class="scoreboard_card_score source">${item.value}</span>`
 		parentNode.appendChild(node)
 	})
 }
