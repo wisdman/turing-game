@@ -1,0 +1,121 @@
+.keyboard {
+	display: block;
+	width: 100%;
+	min-width: 100%;
+	margin: 20px 0 0 0;
+}
+
+.keyboard input {
+	display: none;
+}
+
+.keyboard_row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-content: stretch;
+	align-items: stretch;
+
+	height: 50px;
+	width: 100%;
+	min-width: 100%;
+
+	margin: 10px 0 0 0;
+}
+
+.keyboard_row b,
+.keyboard_row button,
+.keyboard_row label {
+	display: none;
+	min-width: 50px;
+	height: 50px;
+	line-height: 46px;
+	border: 2px solid currentColor;
+	white-space: nowrap;
+	text-align: center;
+	margin: 0 5px;
+	font-size: 22px;
+	cursor: pointer;
+}
+
+.keyboard_row b:hover,
+.keyboard_row button:hover,
+.keyboard_row label:hover {
+	color: #af0000;
+}
+
+.keyboard_row button.backspace,
+.keyboard_row label.shift,
+.keyboard_row label.number,
+.keyboard_row label.abc,
+.keyboard_row button.enter,
+.keyboard_row label.label_en,
+.keyboard_row label.label_ru {
+	font-size: 18px;
+}
+
+.keyboard_row label.shift,
+.keyboard_row button.enter {
+	width: 110px;
+}
+
+.keyboard_row button.backspace {
+	display: block;
+}
+
+.keyboard_row b.space {
+	display: block;
+	width: 410px;
+}
+
+.keyboard_row button.enter {
+	display: block;
+}
+
+#ru:checked ~ #up:not(:checked) ~ .keyboard_row b.ru {
+	display: block;
+}
+
+#ru:checked ~ #up:checked ~ .keyboard_row b.ru_up {
+	display: block;
+}
+
+#en:checked ~ #up:not(:checked) ~ .keyboard_row b.en {
+	display: block;
+}
+
+#en:checked ~ #up:checked ~ .keyboard_row b.en_up {
+	display: block;
+}
+
+#number:checked ~ .keyboard_row b.number {
+	display: block;
+}
+
+#ru:checked ~ .keyboard_row label.label_en,
+#ru:checked ~ .keyboard_row label.number,
+#ru:checked ~ .keyboard_row label.shift {
+	display: block;
+}
+
+#en:checked ~ .keyboard_row label.label_ru,
+#en:checked ~ .keyboard_row label.number,
+#en:checked ~ .keyboard_row label.shift {
+	display: block;
+}
+
+#number:checked ~ .keyboard_row label.abc {
+	display: block;
+}
+
+#number:checked ~ .keyboard_row b.space {
+	width: 470px;
+}
+
+#up:checked ~ .keyboard_row label.shift,
+#up:checked ~ .keyboard_row label.shift:hover {
+	background: #af0000;
+	border-color: #af0000;
+	color: #fff;
+}

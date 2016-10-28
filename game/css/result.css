@@ -56,63 +56,40 @@
 }
 
 .result_user {
-	height: 45px;
-	max-height: 45px;
-	font-size: 30px;
-	text-align: center;
-}
-
-.result_user_photo,
-.result_user_name,
-.result_user_submit {
-	display: inline-block;
-	height: inherit;
-	max-height: inherit;
-	vertical-align:middle;
-	line-height: 45px;
-}
-
-.result_user_photo svg {
-	height: 50px;
-	width: auto;
-	margin-top: -5px
+	display: block;
+	height: auto;
+	width: 780px;
+	margin: 20px 0 0 0;
 }
 
 .result_user_name {
-	text-align: left;
-}
-
-.result_user_name input {
-	/*line-height: 40px;*/
-	vertical-align: top;
-	padding-top: 4px;
-	cursor: text;
-	-webkit-user-select: text;
-			user-select: text;
+	display: block;
+	height: 45px;
+	width: 660px;
+	margin: 0 auto;
+	vertical-align:middle;
+	line-height: 45px;
+	font-size: 22px;
+	position: relative;
+	text-align: center;
 }
 
 .result_user_name:before,
 .result_user_name:after {
-	display: inline-block;
+	display: block;
+	position: absolute;
+	top: 0;
+	width: 20px;
+	height: 100%;
 	font-size: 46px;
 }
 
 .result_user_name:before {
+	left: 0;
 	content: '\005B';
 }
 
 .result_user_name:after {
+	right: 0;
 	content: '\005D';
-}
-
-.result_user_submit {
-	background: #3c3c3c;
-	color: #fefefe;
-	padding: 3px .3em 0;
-	overflow: hidden;
-	transition: background .1s;
-}
-
-.result_user_submit:hover {
-	background: #af0000;
 }

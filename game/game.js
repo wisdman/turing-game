@@ -107,6 +107,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	const game = new App(document.body)
 	game.data.app = appClusterNode.id
 	game.data.user = '---'
+	game.data.userName = ' '
 
 	appClusterNode.onUpdate = () => {
 		game.data.ip = appClusterNode.firstIP
@@ -153,6 +154,8 @@ window.addEventListener('DOMContentLoaded', () => {
 		})
 	}
 
+	let userName = ''
+
 	const setMode = (mode) => {
 		gameMode = mode
 		switch(mode) {
@@ -166,6 +169,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			break
 			case MODE_GAME:
 				game.data.user = uuid.v4()
+				game.data.userName = ' '
 				game.data.title = 'Оприделите кто отвечает'
 				game.data.close = 'Завершить игру'
 				score = 0
@@ -194,6 +198,22 @@ window.addEventListener('DOMContentLoaded', () => {
 				throw new TypeError(`"${mode}" is unknown game mode`)
 		}
 	}
+
+	Array.prototype.forEach.call(document.querySelectorAll('.keyboard_row b'), btn =>
+		btn.addEventListener('click', event => {
+			let user = String(game.data.userName)
+			user += event.target.innerText
+			game.data.userName = user || ' '
+		})
+	)
+
+	Array.prototype.forEach.call(document.querySelectorAll('.keyboard_row .backspace'), btn =>
+		btn.addEventListener('click', event => {
+			let user = String(game.data.userName)
+			user = user.slice(0, -1)
+			game.data.userName = user || ' '
+		})
+	)
 
 	let wasteTime = +new Date()
 	const wasteTimeLoop = () => {
@@ -239,14 +259,11 @@ window.addEventListener('DOMContentLoaded', () => {
 	game.on('human', event => nextQuestion('human'))
 
 	game.on('submit', event => {
-		if (!game.data.name)
-			return
-
-		let name = String(game.data.name).trim()
+		let name = String(game.data.userName).trim()
 		if (!name)
 			return
 
-		game.data.name = ' '
+		game.data.userName = ' '
 
 		appClusterNode.addRecord(game.data.user, name, score, null)
 		setMode(MODE_SCOREBOARD)

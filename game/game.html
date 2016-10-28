@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="css/diskleimer.css" type="text/css">
 	<link rel="stylesheet" href="css/question.css" type="text/css">
 	<link rel="stylesheet" href="css/result.css" type="text/css">
+	<link rel="stylesheet" href="css/keyboard.css" type="text/css">
 	<link rel="stylesheet" href="css/scoreboard.css" type="text/css">
 	<link rel="stylesheet" href="css/scoreline.css" type="text/css">
 
@@ -55,17 +56,192 @@
 			<span class="result_score_tooltip">Ваш счет</span>
 		</div>
 		<div class="result_user">
-			<!-- <button class="result_user_photo" app-event="click, photo">
-				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" viewBox="0 0 500 512">
-					<path d="M170.24,30v34.625v30h30H470V482H30V94.625h44.341h30v-30V30H170.24 M402.414,199.555c23.868,0,43.287-19.414,43.287-43.277c0-23.863-19.418-43.277-43.287-43.277s-43.287,19.414-43.287,43.277C359.127,180.141,378.546,199.555,402.414,199.555 M250,427.478c34.786,0,67.491-13.538,92.091-38.119c24.606-24.587,38.156-57.28,38.156-92.055s-13.551-67.467-38.156-92.055c-24.6-24.582-57.305-38.119-92.091-38.119s-67.491,13.538-92.091,38.119c-24.606,24.587-38.156,57.28-38.156,92.055s13.551,67.467,38.156,92.055C182.509,413.94,215.214,427.478,250,427.478 M200.24,0H74.341v64.625H0V512h500V64.625H200.24V0L200.24,0z M402.414,169.555c-7.338,0-13.287-5.944-13.287-13.277c0-7.333,5.949-13.277,13.287-13.277s13.287,5.944,13.287,13.277C415.701,163.611,409.752,169.555,402.414,169.555L402.414,169.555z M250,397.478c-55.365,0-100.248-44.849-100.248-100.174c0-55.325,44.882-100.174,100.248-100.174s100.248,44.849,100.248,100.174C350.248,352.628,305.365,397.478,250,397.478L250,397.478z"></path>
-				</svg>
-			</button> -->
-			<div class="result_user_name">
-				<input type="text" placeholder="Напишите ваше имя" app-bind="name">
+			<div class="result_user_name" app-bind="userName"></div>
+			<div class="keyboard">
+				<input id="en" type="radio" name="layout" checked>
+				<input id="ru" type="radio" name="layout">
+				<input id="number" type="radio" name="layout">
+				<input id="up" type="checkbox" name="upcase">
+				<div class="keyboard_row">
+					<b class="number">1</b>
+					<b class="number">2</b>
+					<b class="number">3</b>
+					<b class="number">4</b>
+					<b class="number">5</b>
+					<b class="number">6</b>
+					<b class="number">7</b>
+					<b class="number">8</b>
+					<b class="number">9</b>
+					<b class="number">0</b>
+
+
+					<b class="en">q</b>
+					<b class="en">w</b>
+					<b class="en">e</b>
+					<b class="en">r</b>
+					<b class="en">t</b>
+					<b class="en">y</b>
+					<b class="en">u</b>
+					<b class="en">i</b>
+					<b class="en">o</b>
+					<b class="en">p</b>
+
+					<b class="en_up">Q</b>
+					<b class="en_up">W</b>
+					<b class="en_up">E</b>
+					<b class="en_up">R</b>
+					<b class="en_up">T</b>
+					<b class="en_up">Y</b>
+					<b class="en_up">U</b>
+					<b class="en_up">I</b>
+					<b class="en_up">O</b>
+					<b class="en_up">P</b>
+
+					<b class="ru">й</b>
+					<b class="ru">ц</b>
+					<b class="ru">у</b>
+					<b class="ru">к</b>
+					<b class="ru">е</b>
+					<b class="ru">н</b>
+					<b class="ru">г</b>
+					<b class="ru">ш</b>
+					<b class="ru">щ</b>
+					<b class="ru">з</b>
+					<b class="ru">х</b>
+					<b class="ru">ъ</b>
+
+					<b class="ru_up">Й</b>
+					<b class="ru_up">Ц</b>
+					<b class="ru_up">У</b>
+					<b class="ru_up">К</b>
+					<b class="ru_up">Е</b>
+					<b class="ru_up">Н</b>
+					<b class="ru_up">Г</b>
+					<b class="ru_up">Ш</b>
+					<b class="ru_up">Щ</b>
+					<b class="ru_up">З</b>
+					<b class="ru_up">Х</b>
+					<b class="ru_up">Ъ</b>
+
+					<button class="backspace">&lArr;</button>
+				</div>
+				<div class="keyboard_row">
+					<b class="number">-</b>
+					<b class="number">/</b>
+					<b class="number">:</b>
+					<b class="number">;</b>
+					<b class="number">(</b>
+					<b class="number">)</b>
+					<b class="number">$</b>
+					<b class="number">&</b>
+					<b class="number">@</b>
+
+					<b class="en">a</b>
+					<b class="en">s</b>
+					<b class="en">d</b>
+					<b class="en">f</b>
+					<b class="en">g</b>
+					<b class="en">h</b>
+					<b class="en">j</b>
+					<b class="en">k</b>
+					<b class="en">l</b>
+
+					<b class="en_up">A</b>
+					<b class="en_up">S</b>
+					<b class="en_up">D</b>
+					<b class="en_up">F</b>
+					<b class="en_up">G</b>
+					<b class="en_up">H</b>
+					<b class="en_up">J</b>
+					<b class="en_up">K</b>
+					<b class="en_up">L</b>
+
+					<b class="ru">ф</b>
+					<b class="ru">ы</b>
+					<b class="ru">в</b>
+					<b class="ru">а</b>
+					<b class="ru">п</b>
+					<b class="ru">р</b>
+					<b class="ru">о</b>
+					<b class="ru">л</b>
+					<b class="ru">д</b>
+					<b class="ru">ж</b>
+					<b class="ru">э</b>
+
+					<b class="ru_up">Ф</b>
+					<b class="ru_up">Ы</b>
+					<b class="ru_up">В</b>
+					<b class="ru_up">А</b>
+					<b class="ru_up">П</b>
+					<b class="ru_up">Р</b>
+					<b class="ru_up">О</b>
+					<b class="ru_up">Л</b>
+					<b class="ru_up">Д</b>
+					<b class="ru_up">Ж</b>
+					<b class="ru_up">Э</b>
+				</div>
+				<div class="keyboard_row">
+					<label for="up" class="shift">&uArr;&ensp;Shift</label>
+
+					<b class="number">+</b>
+					<b class="number">=</b>
+					<b class="number">.</b>
+					<b class="number">,</b>
+					<b class="number">?</b>
+					<b class="number">!</b>
+					<b class="number">'</b>
+					<b class="number">"</b>
+					<b class="number">"</b>
+
+					<b class="en">z</b>
+					<b class="en">x</b>
+					<b class="en">c</b>
+					<b class="en">v</b>
+					<b class="en">b</b>
+					<b class="en">n</b>
+					<b class="en">m</b>
+
+					<b class="en_up">Z</b>
+					<b class="en_up">X</b>
+					<b class="en_up">C</b>
+					<b class="en_up">V</b>
+					<b class="en_up">B</b>
+					<b class="en_up">N</b>
+					<b class="en_up">M</b>
+
+					<b class="ru">я</b>
+					<b class="ru">ч</b>
+					<b class="ru">с</b>
+					<b class="ru">м</b>
+					<b class="ru">и</b>
+					<b class="ru">т</b>
+					<b class="ru">ь</b>
+					<b class="ru">б</b>
+					<b class="ru">ю</b>
+
+					<b class="ru_up">Я</b>
+					<b class="ru_up">Ч</b>
+					<b class="ru_up">С</b>
+					<b class="ru_up">М</b>
+					<b class="ru_up">И</b>
+					<b class="ru_up">Т</b>
+					<b class="ru_up">Ь</b>
+					<b class="ru_up">Б</b>
+					<b class="ru_up">Ю</b>
+
+					<label for="up" class="shift">&uArr;&ensp;Shift</label>
+				</div>
+				<div class="keyboard_row">
+					<label class="abc" for="en">ABC</label>
+					<label class="number" for="number">123</label>
+					<label class="label_en" for="en">EN</label>
+					<label class="label_ru" for="ru">RU</label>
+					<b class="space">&ensp;</b>
+					<button class="enter" app-event="click, submit">Enter</button>
+				</div>
 			</div>
-			<button class="result_user_submit" app-event="click, submit">ОК</button>
 		</div>
-		<button class="result_user_restart" app-event="click, start">Повторить тест</button>
+		<!-- <button class="result_user_restart" app-event="click, start">Повторить тест</button> -->
 	</div>
 	<div class="wrapper scoreboard" app-ui="scoreboard" app-node="scoreboard">
 		<!-- <div class="scoreboard_card">
