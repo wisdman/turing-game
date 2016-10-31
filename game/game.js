@@ -170,7 +170,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			case MODE_GAME:
 				game.data.user = uuid.v4()
 				game.data.userName = ' '
-				game.data.title = 'Оприделите кто отвечает'
+				game.data.title = 'Определите кто отвечает'
 				game.data.close = 'Завершить игру'
 				score = 0
 				time = GAME_TIME
